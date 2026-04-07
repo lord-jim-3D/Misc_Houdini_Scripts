@@ -1,0 +1,17 @@
+int pcount = chi('point_count') + 2; //This should be the number of points per agent rig
+
+for (int x=0; x<pcount ; x++) {
+    int pnt = (@primnum * pcount) + x;
+    
+    int base = (@primnum * pcount) + (pcount - 1);
+    vector bpos = point(1,'P', base);
+    
+    matrix3 t = point(2,'transform', pnt);
+    vector pos = point(2,'P',pnt) - bpos; 
+    
+    matrix xform = ident();
+    xform *= t;
+    translate(xform, pos);
+    
+    setagentworldtransform(0, @primnum, xform, x);
+}
